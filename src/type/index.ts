@@ -3,11 +3,8 @@ export interface TodoType {
   subject: string;
   completed: boolean;
 }
-export interface Props {
-  todos: TodoType[];
-}
 
-export class ClassProps {
+export class ClassTodoType {
   id: number;
   subject: string;
   completed: boolean;

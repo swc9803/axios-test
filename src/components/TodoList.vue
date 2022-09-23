@@ -1,7 +1,7 @@
 <template>
   <div v-for="(todo, index) in todos" :key="todo.id">
     <input
-      :value="todo.completed"
+      :checked="todo.completed"
       type="checkbox"
       @change="toggleTodo(index)"
     />
@@ -11,13 +11,11 @@
 </template>
 
 <script setup lang="ts">
+import { TodoType } from "@/type/index";
 // eslint-disable-next-line no-undef
-defineProps({
-  todos: {
-    type: Array,
-    required: true,
-  },
-});
+defineProps<{
+  todos: TodoType[];
+}>();
 
 // eslint-disable-next-line no-undef
 const emit = defineEmits(["toggle-todo", "delete-todo"]);
@@ -28,3 +26,10 @@ const deleteTodo = (index: number) => {
   emit("delete-todo", index);
 };
 </script>
+
+<style lang="scss" scoped>
+.completed {
+  color: gray;
+  text-decoration: line-through;
+}
+</style>
