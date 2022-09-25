@@ -1,16 +1,28 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import Todos from "../pages/todos/index.vue";
+import Todo from "../pages/todos/_id.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "home",
-    component: () => import(/* webpackChunkName: "home" */ "../pages/Home.vue"),
+    name: "Home",
+    component: () => import(/* webpackChunkName: "Home" */ "../pages/Home.vue"),
   },
   {
-    path: "/",
-    name: "pinia",
+    path: "/todos",
+    name: "Todos",
+    component: Todos,
+  },
+  {
+    path: "/todos/:id",
+    name: "Todo",
+    component: Todo,
+  },
+  {
+    path: "/pinia",
+    name: "Pinia",
     component: () =>
-      import(/* webpackChunkName: "piniatest" */ "../pages/PiniaTest.vue"),
+      import(/* webpackChunkName: "Piniatest" */ "../pages/PiniaTest.vue"),
   },
 ];
 

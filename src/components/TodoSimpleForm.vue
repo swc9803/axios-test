@@ -7,10 +7,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits } from "vue";
+import { ref } from "vue";
 const todoRef = ref<string>("");
 const hasError = ref<boolean>(false);
 
+// eslint-disable-next-line no-undef
 const emit = defineEmits(["add-todo"]);
 
 const onSubmit = () => {

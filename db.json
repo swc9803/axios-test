@@ -7,7 +7,7 @@
     },
     {
       "subject": "432432423",
-      "completed": true,
+      "completed": false,
       "id": 4
     },
     {
@@ -37,22 +37,22 @@
     },
     {
       "subject": "5555",
-      "completed": false,
+      "completed": true,
       "id": 10
     },
     {
       "subject": "dsadsa",
-      "completed": false,
+      "completed": true,
       "id": 11
     },
     {
-      "subject": "3333",
+      "subject": "3333s47",
       "completed": false,
       "id": 12
     },
     {
-      "subject": "5555",
-      "completed": false,
+      "subject": "7655ㄹㅇㄴ4",
+      "completed": true,
       "id": 13
     }
   ]
