@@ -1,15 +1,13 @@
 <template>
-  <div>{{ toastMessage }}</div>
+  <div>{{ message }}</div>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import { toRefs } from "vue";
 // eslint-disable-next-line no-undef
 const props = defineProps<{
   message: string;
 }>();
-const toastMessage = ref<string>("");
-// eslint-disable-next-line vue/no-setup-props-destructure
-toastMessage.value = props.message;
+const { message } = toRefs(props);
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h2>Todo List</h2>
+    <button class="inline" @click="moveToCreatePage">Create todo</button>
     <input
       v-model="searchText"
       type="text"
@@ -8,7 +9,6 @@
       @keyup.enter="searchTodo"
     />
     <hr />
-    <TodoSimpleForm @add-todo="addTodo" />
     <p v-show="!todos.length">There are no added todos</p>
     <TodoList
       :todos="todos"
@@ -36,18 +36,22 @@
       </button>
     </ul>
   </div>
+  <Toast v-if="showToast" :message="toastMessage" />
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
-import TodoSimpleForm from "@/components/TodoSimpleForm.vue";
 import TodoList from "@/components/TodoList.vue";
+import Toast from "@/components/Toast.vue";
 import axios from "axios";
 import { TodoType } from "@/type/index";
+import { useToast } from "@/composable/toast";
+import { useRouter } from "vue-router";
 
 // json 서버 열기
 // json-server --watch db.json --port 3000
 
+const router = useRouter();
 const todos = ref<TodoType[]>([]);
 const numberOfTodos = ref<number>(0);
 const limit = 5;
@@ -57,6 +61,8 @@ const searchText = ref("");
 const numberOfPages = computed(() => {
   return Math.ceil(numberOfTodos.value / limit);
 });
+
+const { toastMessage, showToast, triggerToast } = useToast();
 
 const getTodos = async (page = currentPage.value) => {
   currentPage.value = page;
@@ -68,6 +74,7 @@ const getTodos = async (page = currentPage.value) => {
     todos.value = res.data;
   } catch (err) {
     console.log(err);
+    triggerToast("error");
   }
 };
 getTodos();
@@ -104,6 +111,12 @@ const deleteTodo = async (index: number) => {
   }
 };
 
+const moveToCreatePage = () => {
+  router.push({
+    name: "TodoCreate",
+  });
+};
+
 let timeout = 0;
 const searchTodo = () => {
   clearTimeout(timeout);
@@ -127,5 +140,9 @@ watch(searchText, () => {
       cursor: pointer;
     }
   }
+}
+.inline {
+  display: inline-block;
+  width: 100%;
 }
 </style>
